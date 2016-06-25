@@ -1,3 +1,7 @@
+import Ember from 'ember';
+
+const { getProperties } = Ember;
+
 const log = [];
 let isEnabled = false;
 const addItem = (item)=> Boolean(isEnabled) && log.push(item);
@@ -57,7 +61,7 @@ const LoggerObject = {
           addItem({
             name,
             message: JSON.stringify(args),
-            socketConnection: this
+            socketConnection: getProperties(this, ['name', 'socket.transport.websocket.url'])
           });
 
           return origFunction.apply(this, args);
