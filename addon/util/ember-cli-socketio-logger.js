@@ -52,7 +52,8 @@ const LoggerObject = {
         const origFunction = soketPrototype[name];
 
         soketPrototype[`_${name}`] = origFunction;
-        soketPrototype[name] = (...args)=> {
+        /* eslint space-before-function-paren: ["error", { "anonymous": "never", "named": "never" }] */
+        soketPrototype[name] = function(...args) {
           addItem({
             name,
             message: JSON.stringify(args),
