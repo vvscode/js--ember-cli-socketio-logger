@@ -59,7 +59,7 @@ const LoggerObject = {
             socketConnection: this
           });
 
-          return origFunction.apply(this, ...args);
+          return origFunction.apply(this, args);
         };
       }
     });
