@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-socketio-logger",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Ember-cli addon to log socket.io request while intergration testing (with Selenium or some other tools )",
   "directories": {
     "doc": "doc",
