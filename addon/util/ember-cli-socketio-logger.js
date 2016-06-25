@@ -8,7 +8,18 @@ const addItem = (item)=> Boolean(isEnabled) && log.push(item);
 let getItemForSerializer = ()=> 'item';
 let filterFunction = ()=> true;
 
-const listOfPatchedMethods = ['emit', 'packet', 'send', 'disconnect'];
+const listOfPatchedMethodsForNamespace = [
+  'onClose',
+  'onConnect',
+  'onDisconnect',
+  'onError',
+  'onOpen',
+  'onPacket',
+  'disconnect',
+  'emit',
+  'packet',
+  'send'
+];
 
 const LoggerObject = {
   clear: ()=> {
@@ -49,14 +60,14 @@ const LoggerObject = {
       }
     } = window;
 
-    const { prototype: soketPrototype } = (SocketNamespace || Socket);
+    const { prototype: soketPrototype } = (Socket || SocketNamespace);
 
-    listOfPatchedMethods.forEach((name)=> {
+    listOfPatchedMethodsForNamespace.forEach((name)=> {
       if (!soketPrototype[`_${name}`]) {
         const origFunction = soketPrototype[name];
 
         soketPrototype[`_${name}`] = origFunction;
-        /* eslint space-before-function-paren: ["error", { "anonymous": "never", "named": "never" }] */
+        /* eslint space-before-function-paren: ['error', { 'anonymous': 'never', 'named': 'never' }] */
         soketPrototype[name] = function(...args) {
           addItem({
             name,
